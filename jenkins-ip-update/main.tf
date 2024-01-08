@@ -17,3 +17,15 @@ resource "aws_route53_record" "jenkins" {
   ttl = 10
   records = [data.aws_instance.jenkins.public_ip]
 }
+
+data "aws_instance" "artifactory" {
+  instance_id = "i-0d9dcbc0cb9e4af34"
+}
+
+resource "aws_route53_record" "artifactory" {
+  name    = "artifactory"
+  type    = "A"
+  zone_id = "Z017218723D63YD2W9JSZ"
+  ttl = 10
+  records = [data.aws_instance.artifactory.public_ip]
+}
