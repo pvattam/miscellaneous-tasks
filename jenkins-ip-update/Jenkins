@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+        node {
+            label "workstation"
+        }
+    }
+
+    options {
+        ansiColor|('xterm')
+    }
+
+    stages{
+
+        stage('Apply){
+            steps{
+                sh '''
+                    cd jenkins-ip-update
+                    terraform init
+                    terraform apply -auto-approve
+                '''
+
+            }
+        }
+    }
+}
