@@ -11,7 +11,7 @@ pipeline {
 
     stages{
 
-        stage('Apply){
+        stage('Apply'){
             steps{
                 sh '''
                   cd jenkins-ip-update
