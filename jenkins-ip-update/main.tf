@@ -29,3 +29,18 @@ resource "aws_route53_record" "artifactory" {
   ttl = 10
   records = [data.aws_instance.artifactory.public_ip]
 }
+
+data "aws_ami" "ami" {
+  most_recent      = true
+  name_regex       = "Centos-8-DevOps-Practice"
+  owners           = ["973714476881"]
+}
+
+resource "aws_instance" "load-gen" {
+  ami = data.aws_ami.ami.image_id
+  instance_type = "t3.medium"
+  vpc_security_group_ids = ["sg-05c45d4106139409c"]
+  tags = {
+    Name = "load-gen"
+  }
+}
