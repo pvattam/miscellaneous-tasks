@@ -30,6 +30,18 @@ resource "aws_route53_record" "artifactory" {
   records = [data.aws_instance.artifactory.public_ip]
 }
 
+data "aws_instance" "elk" {
+  instance_id = "i-0dab5334ba634046e"
+}
+
+resource "aws_route53_record" "elk" {
+  name    = "elasticsearch"
+  type    = "A"
+  zone_id = "Z017218723D63YD2W9JSZ"
+  ttl = 10
+  records = [data.aws_instance.elk.public_ip]
+}
+
 data "aws_ami" "ami" {
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
